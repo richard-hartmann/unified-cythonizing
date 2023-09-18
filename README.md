@@ -1,13 +1,15 @@
 # unified-cythonizing
 Unify building cython extension -- pip install, poetry install, poetry build and development builds
 
-# Disclaimer
 
-This suggestion for building cython extensions is based on use cases from a few projects. 
-Most likely, there are many pitfalls.
-The aim is to share experiences and improve the functionality together.
+The goal of this repository is to unify building cython extensions 
+from command line and by default on installation.
+The main ingredient is the `build_ext.py` script which has a CLI and provides the necessary 
+hooks needed by a build backend.
+Currently the `setuptools` legacy backend and the [poetry](https://python-poetry.org/) 
+backend have been tested.
 
-# Goal
+# Motivation
 
 When doing numerics with python occasionally you will find yourself in a position where 
 your newly developed algorithm needs speedup.
@@ -26,14 +28,6 @@ Modern Python packages usually contain a
 [`pyproject.toml`](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) 
 file to manage packaging (general information, dependencies, build system requirements, 
 build backend ...).
-
-> :large_blue_diamond: The goal of this repository is to unify building cython extensions 
-> from command line and by default on installation.
-> The main ingredient is the `build_ext.py` script which has a CLI and provides the necessary 
-> hooks needed by a build backend.
-> Currently the `setuptools` legacy backend and the [poetry](https://python-poetry.org/) 
-> backend have been tested. 
-
 
 # Preparation
 
@@ -111,6 +105,11 @@ Invoking
 
 from the root directory of your will build (including the cython parts) and install the project.
 
+### included as dependency
+
+When your package is being installed as requirement, the cython extension is build.
+(As an example, see the module `some_mod` under `some_mod_pkg`)
+
 ## clean up
 
 To remove files that have been generated during the build process, type:
@@ -124,6 +123,12 @@ This will remove
 * library files of the extension, i.e., `.so` files
 
 There is an `--yes` flag to remove files without asking. 
+
+# Disclaimer
+
+This suggestion for building cython extensions is based on use cases from a few projects. 
+Most likely, there are many pitfalls.
+The aim is to share experiences and improve the functionality together.
 
 # License - BSD (3 clause)
 

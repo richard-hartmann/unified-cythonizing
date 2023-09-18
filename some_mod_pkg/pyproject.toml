@@ -1,0 +1,15 @@
+[tool.poetry]
+description = "some module"
+name = "some_mod"
+version = "0.0.1"
+authors = [
+    "Richard Hartmann <richard_hartmann@gmx.de>",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.8"
+foo =  {git = 'https://github.com/richard-hartmann/unified-cythonizing'}
+
+[build-system]
+requires = ["poetry>=1.4"]
+build-backend = "poetry.core.masonry.api"
