@@ -1,0 +1,37 @@
+[tool.poetry]
+description = "A foo bar package"
+name = "foo"
+version = "1.0.0"
+authors = [
+    "Richard Hartmann <richard_hartmann@gmx.de>",
+]
+license = "BSD (3 clause)"
+repository = "https://github.com/richard-hartmann/unified-cythonizing"
+readme = "README.md"
+
+# here we expose the build scipt, so that the build backend becomes aware of it
+build = 'build_ext.py'
+
+[tool.poetry.dependencies]
+python = ">=3.8"
+
+# include Cython here so we can use the `build_ext.py` script outside the isolated
+# build environment, too
+black = "^23.9.1"
+[tool.poetry.dev-dependencies]
+Cython = "^3.0.0"
+
+
+# so here we use poetry for building
+[build-system]
+requires = ["poetry>=1.4", "Cython>=3.0"]
+# you need to add here any dependency of the 'build_ext.py' script, e.g. numpy, like:
+# requires = ["poetry>=1.4", "Cython", "numpy"]
+build-backend = "poetry.core.masonry.api"
+
+
+# ... alternatively we can use the fallback behavior
+# see https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/#fallback-behaviour
+#[build-system]
+#requires = ["setuptools>=40.8.0", "wheel", "Cython>=3.0"]
+#build-backend = "setuptools.build_meta:__legacy__"
