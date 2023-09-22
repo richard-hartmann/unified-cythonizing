@@ -4,7 +4,12 @@ This script provides triggers Cython build using distutils.
 Default invocation, i.e., `python3 build_ext.py` does dome distutils magic to
 build the extension inplace which corresponds to former call of `setup.py build_ext --inplace`.
 
+original source: https://github.com/richard-hartmann/unified-cythonizing/edit/main/build_ext.py
+
+Copyright 2023 Richard Hartmann
+BSD (3 clause) License
 """
+
 from Cython.Build import cythonize
 import argparse
 from distutils.command.build_ext import build_ext
